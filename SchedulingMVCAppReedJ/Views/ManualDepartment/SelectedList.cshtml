@@ -1,0 +1,67 @@
+﻿@model List<Course>
+@{
+    ViewData["Title"] = "SelectedList";
+}
+
+<h2>Selected Courses</h2>
+
+<form asp-action="SelectedListResult" method="post">
+
+    <div class="form-group">
+        <label>Department </label>
+        <select name="DepartmentID" asp-items="ViewBag.Departments" class="form-control" id="department-target">
+            <option value="0">None</option>
+        </select>
+    </div>
+
+    <div id="wrapper">
+
+        <div class=" form-group "style="float:left; width:50%">
+            <label>Select Courses</label>
+            <div id="course-target"></div>  
+            <input type="submit" value="Search" class="btn btn-default" />
+        </div>
+
+        <div id="selected-courses" style="float:right; width:50%">
+            <label>Selected Courses</label>
+            @if (Model == null || Model.Count == 0)
+            {
+                <label>"No Courses Selected"</label>
+            }
+            else
+            {
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Course Number</th>
+                            <th>Course Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Course eachCourse in Model)
+                        {
+                            <tr>
+                                <td>@eachCourse.CourseNumber</td>
+                                <td>@eachCourse.CourseName</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a class="btn btn-primary" asp-action="SaveSelections"> Save Selections</a>
+
+            }
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        
+    </div>
+</form>
+
+@section Scripts
+    {
+    <script src="http://code.jquery.com/jquery-latest-min.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="~/js/CheckBoxList.js"> </script>
+    }

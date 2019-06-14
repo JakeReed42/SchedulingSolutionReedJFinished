@@ -1,0 +1,63 @@
+﻿@model DepartmentCourseViewModel
+@{
+ViewData["Title"] = "NestedDDL";
+}
+
+<h2>Nested DDL</h2>
+
+<form asp-action="NestedDDL" method="post">
+
+    <div class="form-group">
+        <label>Department </label>
+        <select asp-for="DepartmentID" asp-items="Model.Departments" class="form-control" id="department-target"> </select>
+    </div>
+
+    <div class=" form-group">
+        <label>Course</label>
+        <select multiple asp-for="CourseID" asp-items="Model.Courses" class="form-control" id="course-target"></select>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Search" class="btn btn-default" />
+    </div>
+</form>
+
+@section Scripts
+    {
+    <script src="http://code.jquery.com/jquery-latest-min.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="~/js/NestedDDL.js">
+
+                        //$(document).ready(function ()
+                        //{
+                        //    $("#department-target").on("change", function () {
+
+                        //        $list = $("#course-target");
+                        //        $.ajax(
+                        //            {
+                        //                url: "GetCourses",
+                        //                type: "GET",
+                        //                dataType: "json",
+                        //                data: { id: $("#department-target").val() },
+                        //                success: function (data)
+                        //                {
+                        //                    $list.empty();
+                        //                    $.each(data, function ()
+                        //                    {
+                        //                        $list.append('<option value=" ' + this.CourseID + ' "> ' + this.CourseName + ' </option>');
+
+                        //                    });
+                        //                },
+                        //                error: function ()
+                        //                {
+                        //                    alert("Data Not Recieved");
+                        //                }
+
+
+                        //            });
+                        //    });
+                        //});
+
+    </script>
+
+}

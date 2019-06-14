@@ -1,0 +1,86 @@
+﻿@model IEnumerable<CourseOffering>
+@{
+    ViewData["Title"] = "SearchResult";
+}
+
+<h2>SearchResult</h2>
+
+@if (Model.Count() == 0)
+{
+    <h4>No Matches For Your Search</h4>
+}
+
+else
+{
+    <table class=" table table-bordered table-striped">
+
+        <thead>
+            <tr>
+                <td>CRN</td>
+                <td>Course Name</td>
+                <td>Department Name</td>
+                <td>Instructor Name</td>
+                <td>Days</td>
+                <td>Start Time</td>
+                <td>End Time</td>
+                <td>Course Start Date</td>
+                <td>Course End Date</td>
+                <td>Delete</td>
+                <td>Edit</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (CourseOffering eachOffering in Model)
+            {
+                var startDate = eachOffering.StartDate.Month + "/" + eachOffering.StartDate.Day
+                    + "/" + eachOffering.StartDate.Year;
+                var endDate = eachOffering.EndDate.Month + "/" + eachOffering.EndDate.Day
+                    + "/" + eachOffering.EndDate.Year;
+
+                var lastName = "Temp String";
+
+                @if (eachOffering.InstructorID == null)
+                {
+                    lastName = "No Instructor Assigned";
+                }
+
+                else
+                {
+                    lastName = eachOffering.Instructor.InstructorLastName;
+                }
+
+            <tr>
+                <td>@eachOffering.CRN</td>
+                <td>@eachOffering.Course.CourseName</td>
+                <td>@eachOffering.Course.Department.DepartmentName</td>
+                <td>@lastName</td>
+                <td>@eachOffering.Days</td>
+                <td>@eachOffering.StartTime.ToShortTimeString()</td>
+                <td>@eachOffering.EndTime.ToShortTimeString()</td>
+                <td>@startDate</td>
+                <td>@endDate</td>
+                <td>
+                    <a class="btn btn-danger"  asp-controller="CourseOfferings" asp-action="DeleteCourseOffering" asp-route-id="@eachOffering.CourseOfferingID">  @eachOffering.CRN Delete Offering</a>
+                </td>
+
+                <td>
+                    <a class="btn btn-warning" asp-action="EditCourseOffering" asp-controller="CourseOfferings" asp-route-id="@eachOffering.CourseOfferingID">  @eachOffering.CRN Edit Offering</a>
+                </td>
+
+            </tr>
+            }
+
+
+        </tbody>
+
+
+
+    </table>
+
+    <li><a asp-area="" asp-controller="CourseOfferings" asp-action="FindCourseOfferingsWithoutAssignedInstructors">Add Instructors to course offerings</a></li>
+
+} @*end of else*@
+
+
+    <a class="btn btn-success" asp-action="AddCourseOffering" asp-controller="CourseOfferings"> Add New CourseOffering</a>

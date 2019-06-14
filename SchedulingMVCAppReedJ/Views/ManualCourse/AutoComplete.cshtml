@@ -1,0 +1,40 @@
+﻿@model Course
+@{
+    ViewData["Title"] = "AutoComplete";
+}
+
+<h2>AutoComplete</h2>
+
+<form asp-action="AutoComplete" method="post">
+
+    <div class="form-group">
+        <label> Choose Course</label>
+        <input asp-for="CourseName" type="text" class="form-control" />
+        <input asp-for="CourseID" type="hidden" />
+    </div>
+    <button type="submit" class="btn btn-success">Search</button>
+</form>
+
+@section Scripts {
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery-ui.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        
+        $('#CourseName').autocomplete(
+            {
+                source: "GetCoursesForAutoComplete",
+                select: function (event, ui)
+                {
+                    $('#CourseID').val(ui.item.id);
+                }
+            });
+        
+        
+        });
+
+</script>
+    }

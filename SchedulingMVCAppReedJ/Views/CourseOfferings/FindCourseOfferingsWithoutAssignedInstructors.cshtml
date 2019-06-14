@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CourseOffering>
+@{
+    ViewData["Title"] = "FindCourseOfferingsWithoutAssignedInstructors";
+    //Layout = "AddInstructor";
+}
+
+<h2>Course Offerings That Need Instructors</h2>
+
+@if (Model.Count() == 0)
+{
+<h4> No Course Offerings Without Instructors</h4>
+}
+
+
+else
+{
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>CRN</th>
+            <th>Course Name</th>
+            <th>Department Name</th>
+            <th>Days</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Course Start Date</th>
+            <th>Course End Date</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+    @foreach (CourseOffering eachOffering in Model)
+    {
+        var startDate = eachOffering.StartDate.Month + "/" + eachOffering.StartDate.Day
+            + "/" + eachOffering.StartDate.Year;
+        var endDate = eachOffering.EndDate.Month + "/" + eachOffering.EndDate.Day
+            + "/" + eachOffering.EndDate.Year;
+
+        <tr>
+            <td>@eachOffering.CRN</td>
+            <td>@eachOffering.Course.CourseName</td>
+            <td>@eachOffering.Course.Department.DepartmentName</td>
+            
+            <td>@eachOffering.Days</td>
+            <td>@eachOffering.StartTime.ToShortTimeString()</td>
+            <td>@eachOffering.EndTime.ToShortTimeString()</td>
+            <td>@startDate</td>
+            <td>@endDate</td>
+            <td>
+                <a class="btn btn-primary" asp-action="AddInstructorToOffering" asp-route-id="@eachOffering.CourseOfferingID">Add an Instructor To Offering</a>
+            </td>
+        </tr>
+
+
+
+    }
+    </tbody>
+
+    
+
+
+</table>
+}@*end of else*@

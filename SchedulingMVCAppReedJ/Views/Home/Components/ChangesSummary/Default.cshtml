@@ -1,0 +1,46 @@
+﻿@model ChangesSummaryViewModel
+@{
+    ViewData["Title"] = "Default";
+}
+
+<h2>Changes</h2>
+
+<table class="table table-striped">
+    <tr>
+        <td>Total Additions</td>
+        <td>@Model.NumberOfAddedCourses</td>
+    </tr>
+
+    <tr>
+        <td>Total Edits</td>
+        <td>@Model.NumberOfEditedCourses</td>
+    </tr>
+
+    <tr>
+        <td>Total Deletes</td>
+        <td>@Model.NumberOfRemovedCourses</td>
+    </tr>
+
+    <tr>
+        <td colspan="2">
+            <a asp-controller="CourseOfferingChanges"
+               asp-action="ViewAllChanges" class="text-left bg-info">List Of Changes</a>
+        </td>
+
+    </tr>
+    @*<tr>
+        <td colspan="2">
+            <div class="bg-success" id="barChart" style="height: 250px;"></div>
+        </td>
+    </tr>*@
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" rel="stylesheet" />
+
+<script type="text/javascript" src="~/js/BarChartForChanges.min.js"></script>

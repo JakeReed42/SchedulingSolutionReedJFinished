@@ -1,0 +1,35 @@
+﻿@model  Instructor
+@{
+    ViewData["Title"] = "AddInstructor";
+    //Layout = "AddInstructor";
+}
+
+<h2>Add a New Instructor</h2>
+
+<form asp-action="AddInstructor" method="post">
+
+    <div class="form-group">
+        <label>First Name</label>
+        <input asp-for="InstructorFirstName" class="form-control" />
+    </div>
+        
+    <div class="form-group">
+        <label>Last Name</label>
+        <input asp-for="InstructorLastName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Instructor Email</label>
+        <input asp-for="InstructorEmail" class="form-control" />
+    </div>
+
+    <div class=" form-group">
+        <label>Department</label>
+        <select asp-for="DepartmentID" asp-items="ViewBag.Departments" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Add New Instructor" class="btn btn-default" />
+    </div>
+
+</form>

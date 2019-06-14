@@ -1,0 +1,48 @@
+﻿@model CourseSummaryViewModel
+@{
+    ViewData["Title"] = "Default";
+}
+
+
+
+<table class="table table-bordered small">
+    <tr>
+        <td>Total Courses</td>
+        <td>@Model.NumberOfCoursesOffered</td>
+    </tr>
+    <tr>
+        <td>Morning Courses </td>
+        <td>@Model.NumberOfCoursesOfferedInTheMorning</td>
+    </tr>
+    <tr>
+        <td>Courses at 90%</td>
+        <td>@Model.NumberOfCoursesAtCapacity</td>
+    </tr>
+
+    <tr>
+        <td>Courses at 50% or less</td>
+        <td>@Model.NumberOfCoursesWithSpaceLeft</td>
+    </tr>
+
+    <tr>
+        <td colspan="2">
+            <a asp-controller="CourseOfferings"
+               asp-action="SearchCourseOfferingsCombined" class="text-left bg-info">Course Offerings Search</a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div class="bg-success" id="chart" style="height: 250px;"></div>
+        </td>
+    </tr>
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" rel="stylesheet" />
+
+<script type="text/javascript" src="~/js/CoursesEnrollmentChart.js"></script>

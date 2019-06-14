@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Instructor>
+@{
+    ViewData["Title"] = "List All Instructors";
+}
+
+<h2>List All Instructors</h2>
+
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>Instructor Name</th>
+            <th>Instructor Email</th>
+            <th>Department Name</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+       
+
+        @foreach (Instructor eachInstructor in Model)
+        {
+            var InstructorName = eachInstructor.InstructorFirstName + " " + eachInstructor.InstructorLastName;
+
+        <tr>
+               <td>@InstructorName</td>
+               <td>@eachInstructor.InstructorEmail</td>
+               <td>@eachInstructor.Department.DepartmentName</td>
+               <td>
+                   <a class="btn btn-primary" asp-action="DeleteInstructor" asp-controller="Instructor" asp-route-id="@eachInstructor.InstructorID"> Delete @eachInstructor.InstructorLastName </a>
+               </td>
+        </tr>
+        }
+    </tbody>
+          
+</table>
+
+<a class="btn btn-primary" asp-action="AddInstructor" asp-controller="Instructor"> Add New Instructor</a>

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Course>
+@{
+    ViewData["Title"] = "AllOfferingsForAllCourses";
+}
+
+<h2>All Offerings For All Courses</h2>
+
+@if (Model.Count() == 0)
+{
+    <h4>No Classes :(</h4>
+}
+
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Course ID</th>
+                <th>Course Name</th>
+                <th>Course Number</th>
+                <th>Department ID</th>
+                <th>Department Name</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (Course eachCourse in Model)
+            {
+
+                <tr>
+                    <td>@eachCourse.CourseID</td>
+                    <td>@eachCourse.CourseName</td>
+                    <td>@eachCourse.CourseNumber</td>
+                    <td>@eachCourse.DepartmentID</td>
+                    <td>@eachCourse.Department.DepartmentName</td>
+                </tr>
+
+                @if (eachCourse.CoursesOfferings != null)
+                {
+                    <tr>
+                        <th></th>
+                        <th>CRN</th>
+                        <th>Days</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                    @foreach (CourseOffering eachOffering in eachCourse.CoursesOfferings)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@eachOffering.CRN</td>
+                            <td>@eachOffering.Days</td>
+                            <td>@eachOffering.StartTime</td>
+                            <td>@eachOffering.EndTime</td>
+                        </tr>
+                    }@*end of offering foreach *@
+                }@*end of if*@
+            }@*end of course each*@
+        </tbody>
+    </table>
+}
